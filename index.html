@@ -1,0 +1,92 @@
+<html class="scroll-smooth" lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Pembayaran Dana - Kirim Bukti Transfer
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col items-center p-4">
+  <main class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+   <h1 class="text-2xl font-semibold text-center mb-6 text-gray-800">
+    Pembayaran Dana
+   </h1>
+   <section class="mb-6">
+    <h2 class="text-lg font-semibold mb-3 text-gray-700">
+     Scan QR Dana
+    </h2>
+    <div class="flex justify-center mb-4">
+     <img alt="QR code for Dana payment, black and white square pattern on white background" class="w-56 h-56 object-contain rounded-md shadow-md" height="250" loading="lazy" src="https://files.catbox.moe/qjdas7.png" width="250"/>
+    </div>
+    <p class="text-center text-gray-600">
+     Scan QR code di atas menggunakan aplikasi Dana untuk melakukan pembayaran.
+    </p>
+   </section>
+   <section class="mb-6">
+    <h2 class="text-lg font-semibold mb-3 text-gray-700">
+     Salin Nomor Dana
+    </h2>
+    <div class="flex items-center justify-between bg-gray-100 rounded-md p-3 mb-2 select-all">
+     <span class="text-gray-800 font-mono text-lg" id="danaNumber">
+      085366010255
+     </span>
+     <button aria-label="Salin nomor Dana" class="ml-3 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md flex items-center" id="copyBtn">
+      <i class="fas fa-copy mr-2">
+      </i>
+      Salin
+     </button>
+    </div>
+    <p class="text-sm text-gray-500">
+     Klik tombol salin untuk menyalin nomor Dana ke clipboard.
+    </p>
+   </section>
+   <section>
+    <h2 class="text-lg font-semibold mb-3 text-gray-700">
+     Kirim Bukti Transfer
+    </h2>
+    <p class="mb-3 text-gray-600">
+     Setelah melakukan pembayaran, silakan screenshot bukti transfer dan kirim ke admin WhatsApp melalui tombol di bawah ini.
+    </p>
+    <button aria-label="Buka chat WhatsApp dengan admin tanpa menampilkan nomor" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-md flex items-center justify-center space-x-3" id="openWaBtn" type="button">
+     <i class="fab fa-whatsapp text-2xl">
+     </i>
+     <span>
+      Kirim ke Admin
+     </span>
+    </button>
+   </section>
+  </main>
+  <script>
+   const copyBtn = document.getElementById('copyBtn');
+    const danaNumber = document.getElementById('danaNumber').textContent;
+
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(danaNumber).then(() => {
+        copyBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Tersalin';
+        copyBtn.disabled = true;
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fas fa-copy mr-2"></i> Salin';
+          copyBtn.disabled = false;
+        }, 2000);
+      });
+    });
+
+    const openWaBtn = document.getElementById('openWaBtn');
+    openWaBtn.addEventListener('click', () => {
+      // Open WhatsApp chat without showing the number in UI, but number is needed in URL
+      // So we just open the link in new tab without displaying number on page
+      const waUrl = 'https://wa.me/6285366010255';
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    });
+  </script>
+ </body>
+</html>
